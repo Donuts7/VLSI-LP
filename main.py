@@ -1,6 +1,7 @@
 from pulp import *
 # così il problema non trova una soluzione, se togli il constraint linea 40 invece si (trova 0 ma non va bene ovviamente)
 
+
 # questi sono dati hardcodati, poi quando facciamo funzionare metteremo la possibilità di leggere da file
 width = 8
 n_circuits = 4
