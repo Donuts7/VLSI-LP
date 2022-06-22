@@ -16,6 +16,7 @@ y_coord = [LpVariable("y{}".format(i + 1), 1, max_y, LpInteger) for i in range(n
 x_pair = [[LpVariable("x{}{}".format(i + 1, j + 1), 0, 1, LpBinary) for j in range(n_circuits)]for i in range(n_circuits)]
 y_pair = [[LpVariable("y{}{}".format(i + 1, j + 1), 0, 1, LpBinary) for j in range(n_circuits)]for i in range(n_circuits)]
 
+# test git
 
 
 prob += height, "Height of the plate"
