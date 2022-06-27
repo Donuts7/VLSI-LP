@@ -39,7 +39,7 @@ for i in range(n_circuits):
             prob += y_coord[i] - circuit_y[j] >= y_coord[j] - height * (2 - x_pair[i][j] - y_pair[i][j])
 
 prob.solve()
-print("aaaaaaaaa", x_pair[2][2].varValue)
+
 
 for i in range(n_circuits):
     for j in range(n_circuits):
