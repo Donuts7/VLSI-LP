@@ -1,13 +1,15 @@
 from pulp import *
+from utils import *
 # così il problema non trova una soluzione, se togli il constraint linea 40 invece si (trova 0 ma non va bene ovviamente)
+ins_number=2
 
+d = get_data(ins_number)
 
-# questi sono dati hardcodati, poi quando facciamo funzionare metteremo la possibilità di leggere da file
-width = 8
-n_circuits = 4
-circuit_x = [3, 3, 5, 5]
-circuit_y = [3, 5, 3, 5]
-max_y = 5
+width = d['width']
+n_circuits = d['n_circuits']
+circuit_x = d["circuit_x"]
+circuit_y = d["circuit_y"]
+max_y = d['max_y']
 
 prob = LpProblem("VLSI", LpMinimize)
 
@@ -15,8 +17,8 @@ prob = LpProblem("VLSI", LpMinimize)
 height = sum(circuit_y)
 h_to_min = LpVariable("Height",max_y,height,LpInteger)
 
-x_coord = [LpVariable("x{}".format(i + 1), 1, max(circuit_x), LpInteger) for i in range(n_circuits)]
-y_coord = [LpVariable("y{}".format(i + 1), 1, max_y, LpInteger) for i in range(n_circuits)]
+x_coord = [LpVariable("x{}".format(i + 1), 0, width, LpInteger) for i in range(n_circuits)]
+y_coord = [LpVariable("y{}".format(i + 1), 0, height, LpInteger) for i in range(n_circuits)]
 
 # non so come fare in modo che queste due siano variabili booleane
 x_pair = [[LpVariable("x{}{}".format(i + 1, j + 1), 0, 1, cat="Integer") for j in range(n_circuits)]for i in range(n_circuits)]
@@ -40,7 +42,7 @@ for i in range(n_circuits):
 
 prob.solve()
 
-
+'''
 for i in range(n_circuits):
     for j in range(n_circuits):
         if x_pair[i][j].varValue != None:
@@ -48,8 +50,16 @@ for i in range(n_circuits):
 
 for i in range(n_circuits):
       print(x_coord[i], '=', x_coord[i].varValue, ' ', y_coord[i], '=', y_coord[i].varValue)
+'''
+out = ""
+out += "{} {}\n".format(width, int(h_to_min.varValue))
 
+for i in range(n_circuits):
+    out += "{} {} {} {}\n".format(circuit_x[i], circuit_y[i], int(x_coord[i].varValue), int(y_coord[i].varValue))
 
+out += "----------"
+
+print(out)
 """    
 for v in prob.variables():
     if len(v.name) == 2:
