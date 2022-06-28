@@ -38,7 +38,7 @@ def get_data(instance_num):
     z = int((tot_area - (max_y * d['width'])) / d['width'])
     d['max_height'] = max_y + z
     d['max_y'] = max_y
-    # print('\nmax height: ' ,(d['max_height']), '\nmax y: ' , max_y)
+
 
     return d
 

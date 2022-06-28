@@ -52,4 +52,5 @@ for ins_number in range(1, 41):
 
     out += "----------"
 
+
     save_data(out, ins_number)

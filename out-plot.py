@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import csv
 import numpy as np
+import matplotlib.patches as mpatches
 
 for ins in range(1, 41):
     a = []
@@ -66,7 +67,7 @@ for ins in range(1, 41):
         ax.set_ylabel('Height')
 
 
-        import matplotlib.patches as mpatches
+
 
         bound = np.linspace(0, 1, n_colors + 1)
         bound_prep = np.round(bound * (n_colors - 1), 2)
