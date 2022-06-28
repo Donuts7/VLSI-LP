@@ -38,6 +38,7 @@ for ins in range(1, 41):
         cell = np.flipud(cell)
         return cell
 
+
     legnd = []
     for el in range(2, len(ints)):
         legnd.append("size: " + str(ints[el][0]) + ", " + str(ints[el][1]) +
@@ -64,10 +65,7 @@ for ins in range(1, 41):
         ax.set_xlabel('Width')
         ax.set_ylabel('Height')
 
-        # ax.plot(data,label = 'aaal')
-        # ax.legend()
 
-        # ax.legend(data,bbox_to_anchor=(1.04, 1), loc="upper left")
         import matplotlib.patches as mpatches
 
         bound = np.linspace(0, 1, n_colors + 1)
@@ -82,6 +80,4 @@ for ins in range(1, 41):
         print("Empty output")
     else:
         plt.savefig('plotted-out\ins-{}-plotted'.format(ins))
-        # plt.show()
-
 

@@ -2,10 +2,7 @@ import pulp as pl
 from pulp import *
 from utils import *
 
-
 for ins_number in range(1, 41):
-
-    # print(listSolvers(onlyAvailable = True))
 
     d = get_data(ins_number)
 
@@ -19,31 +16,19 @@ for ins_number in range(1, 41):
 
     solver_list = pl.listSolvers()
     path_to_cplex = r"C:\Program Files\IBM\ILOG\CPLEX_Studio221\cplex\bin\x64_win64\cplex.exe"
-    solver = pl.CPLEX_CMD(path=path_to_cplex,timelimit=180)
-    #solver = pl.get_solver('CPLEX_PY')
-    #solver.buildSolverModel(prob)
+    solver = pl.CPLEX_CMD(path=path_to_cplex, timelimit=180)
 
-    # Modify the solvermodel
-   # solver.solverModel.parameters.timelimit.set(60)
-
-
-
-
-
-    # mantengo sia Y che H (come nel video), dove Y è h_to_min e H è height
     height = sum(circuit_y)
     h_to_min = LpVariable("Height", max_y, height, LpInteger)
 
     x_coord = [LpVariable("x{}".format(i + 1), 0, width, LpInteger) for i in range(n_circuits)]
     y_coord = [LpVariable("y{}".format(i + 1), 0, height, LpInteger) for i in range(n_circuits)]
 
-    # non so come fare in modo che queste due siano variabili booleane
     x_pair = [[LpVariable("x{}-{}".format(i + 1, j + 1), 0, 1, cat="Integer") for j in range(n_circuits)] for i in
               range(n_circuits)]
     y_pair = [[LpVariable("y{}-{}".format(i + 1, j + 1), 0, 1, cat="Integer") for j in range(n_circuits)] for i in
               range(n_circuits)]
 
-    # questa è da minimizzare
     prob += h_to_min, "Height of the plate"
 
     for i in range(n_circuits):
@@ -57,20 +42,8 @@ for ins_number in range(1, 41):
                 prob += y_coord[i] + circuit_y[i] <= y_coord[j] + height * (1 + x_pair[i][j] - y_pair[i][j])
                 prob += y_coord[i] - circuit_y[j] >= y_coord[j] - height * (2 - x_pair[i][j] - y_pair[i][j])
 
-
     prob.solve(solver)
-    # Solve P
-    #solver.callSolver(prob)
-    #status = solver.findSolutionValues(prob)
-    '''
-    for i in range(n_circuits):
-        for j in range(n_circuits):
-            if x_pair[i][j].varValue != None:
-                print(x_pair[i][j], '=', x_pair[i][j].varValue, ' ', y_pair[i][j], '=', y_pair[i][j].varValue)
-    
-    for i in range(n_circuits):
-          print(x_coord[i], '=', x_coord[i].varValue, ' ', y_coord[i], '=', y_coord[i].varValue)
-    '''
+
     out = ""
     out += "{} {}\n{}\n".format(width, int(h_to_min.varValue), n_circuits)
 

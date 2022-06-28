@@ -1,10 +1,6 @@
-import csv
 import os
-import matplotlib.pyplot as plt
-# from matplotlib.cm import get_cmap
-from matplotlib.ticker import MaxNLocator
 import csv
-import numpy as np
+
 
 def get_data(instance_num):
     with open('instances\ins-{}.txt'.format(instance_num), 'r') as fd:
@@ -46,20 +42,10 @@ def get_data(instance_num):
 
     return d
 
-def save_data(out,ins_number):
+
+def save_data(out, ins_number):
     save_path = "my-out"
     file_name = "ins-{}-solved.txt".format(ins_number)
     completeName = os.path.join(save_path, file_name)
     file1 = open(completeName, "w")
     file1.write(out)
-
-
-#non mi andava di cancellarlo, forse ci si può fare qualcosa
-"""
-    for i in range(n_circuits):
-        for j in range(n_circuits):
-            if x_pair[i][j].x is not None:
-                print(x_pair[i][j].name, '=', x_pair[i][j].x, ' ', y_pair[i][j].name, '=', y_pair[i][j].x)
-    """
-
-
