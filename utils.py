@@ -39,7 +39,6 @@ def get_data(instance_num):
     d['max_height'] = max_y + z
     d['max_y'] = max_y
 
-
     return d
 
 

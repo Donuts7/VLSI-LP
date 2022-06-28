@@ -4,6 +4,7 @@ import csv
 import numpy as np
 import matplotlib.patches as mpatches
 
+
 for ins in range(1, 41):
     a = []
     with open('my-out\ins-{}-solved.txt'.format(ins), 'r') as fd:
